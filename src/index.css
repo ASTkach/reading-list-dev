@@ -1,0 +1,84 @@
+:root {
+    --basic-family: 'Taviraj', serif;
+
+    --fz-200: 14px;
+    --fz-300: 16px;
+    --basic-fz: 18px;
+    --fz-500: 20px;
+    --fz-600: 22px;
+    --fz-700: 28px;
+    --fz-800: 38px;
+    --fz-900: 44px;
+    --h1-fz-smaller: 30px;
+    --h1-fz-small: 52px;
+    --h1-fz-big: 68px;
+
+    --basic-color: hsl(0, 0%, 100%);
+    --secondary-color: hsl(208, 25%, 65%);
+    --secondary-color-dark: hsl(208, 25%, 9%);
+    --secondary-color-darker: hsl(208, 25%, 5%);
+    --basic-bg-color: hsl(208, 20%, 22%);
+
+    --color-accent-primary-light: hsl(162, 83%, 70%);
+    --color-accent-primary: hsl(162, 83%, 40%);
+}
+
+h1,
+h2,
+p {
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+input,
+button {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 1vw;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent-primary);
+    border-radius: 100vw;
+    border: 1px solid var(--secondary-color-dark);
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--secondary-color-dark);
+    border-radius: 100vw;
+    margin-block: 5px;
+}
+
+@supports (scrollbar-color: var(--color-accent-primary) var(--secondary-color-dark)) {
+    * {
+        scrollbar-color: var(--color-accent-primary) var(--secondary-color-dark);
+        scrollbar-width: thin;
+    }
+}
+
+html,
+body {
+    position: relative;
+    min-height: 100vh;
+    font-family: var(--basic-family);
+    color: var(--basic-color);
+    background-color: var(--basic-bg-color);
+    margin: 0;
+}
