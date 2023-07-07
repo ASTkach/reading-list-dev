@@ -2,9 +2,14 @@ import { useEffect, useRef } from 'react';
 
 const OrnamentItem = ({ svgClass, svgWidth, svgHeight, svgViewBox, svgPath, delay, duration }) => {
     const svgRef = useRef(null);
+    const STROKE_COLOR = 'hsl(208, 25%, 65%)';
 
     useEffect(() => {
         const svg = svgRef.current;
+        getSvgItems(svg);
+    }, []);
+
+    const getSvgItems = (svg) => {
         svg.innerHTML = svgPath;
 
         const svgItems = Array.from(svg.children);
@@ -13,15 +18,15 @@ const OrnamentItem = ({ svgClass, svgWidth, svgHeight, svgViewBox, svgPath, dela
             let itemLength = `${Math.ceil(item.getTotalLength())}`;
             item.style.strokeDasharray = itemLength;
             item.style.strokeDashoffset = itemLength;
-            item.style.stroke = 'hsl(208, 25%, 65%)';
+            item.style.stroke = STROKE_COLOR;
 
-            item.animate([{ strokeaDshoffset: `${itemLength}` }, { strokeDashoffset: 0 }], {
+            item.animate([{ strokeDashoffset: `${itemLength}` }, { strokeDashoffset: 0 }], {
                 duration,
                 delay: index * delay,
                 fill: 'forwards',
             });
         });
-    }, []);
+    };
 
     return (
         <svg
@@ -31,7 +36,7 @@ const OrnamentItem = ({ svgClass, svgWidth, svgHeight, svgViewBox, svgPath, dela
             height={svgHeight}
             viewBox={svgViewBox}
             xmlns="http://www.w3.org/2000/svg"
-        ></svg>
+        />
     );
 };
 

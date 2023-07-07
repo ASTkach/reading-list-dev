@@ -2,12 +2,12 @@ const ListMessage = ({ searchedBook, filteredBooks }) => {
     let message;
 
     if (!searchedBook.length && filteredBooks.length) {
-        message = <h2 className="empty-list">No match found.</h2>;
+        message = 'No match found.';
     } else if (!searchedBook.length) {
-        message = <h2 className="empty-list">List is empty.</h2>;
+        message = 'List is empty';
     }
 
-    return <>{message}</>;
+    return <>{message && <h2 className="empty-list">{message}</h2>}</>;
 };
 
 export default ListMessage;

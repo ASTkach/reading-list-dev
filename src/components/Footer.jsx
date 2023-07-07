@@ -6,7 +6,7 @@ const Footer = () => {
                 className="footer__link"
                 href="https://github.com/ASTkach"
                 target="_blank"
-                rel="nofollow noopener"
+                rel="noreferrer"
             >
                 anatolii.s.tkach
             </a>

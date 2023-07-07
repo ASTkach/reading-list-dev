@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import Book from './Book';
 
-const BookList = ({ changeCategory, searchedBook, windowWidth }) => {
+const BookList = ({ searchedBook, addBook }) => {
     const listRef = useRef(null);
 
     useEffect(() => {
@@ -13,17 +13,12 @@ const BookList = ({ changeCategory, searchedBook, windowWidth }) => {
         } else {
             currentList.style.marginLeft = null;
         }
-    }, [windowWidth]);
+    }, [addBook]);
 
     return (
         <ul ref={listRef} className="list">
             {searchedBook.map((book) => (
-                <Book
-                    {...book}
-                    key={book.id}
-                    changeCategory={changeCategory}
-                    windowWidth={windowWidth}
-                />
+                <Book {...book} key={book.id} />
             ))}
         </ul>
     );

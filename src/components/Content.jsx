@@ -1,9 +1,9 @@
 import { useRef, useLayoutEffect } from 'react';
-import Title from './Title';
-import ReadingForm from './ReadingForm';
+import ReadingForm from './ui/ReadingForm';
 import RemoveAllButton from './ui/RemoveAllButton';
 import ListMessage from './ListMessage';
 import BookList from './BookList';
+import { IN_PROGRESS_CATEGORY, DONE_CATEGORY, MIN_CONTENT_HEIGHT } from '../constants';
 
 const Content = ({
     filteredBooks,
@@ -12,15 +12,14 @@ const Content = ({
     addBook,
     removeBooks,
     searchedBook,
-    changeCategory,
-    windowWidth,
     windowHeight,
+    hiddenClass,
 }) => {
     const contentRef = useRef(null);
 
     useLayoutEffect(() => {
         const content = contentRef.current;
-        if (windowHeight < 576) {
+        if (windowHeight < MIN_CONTENT_HEIGHT) {
             content.style.height = 'auto';
         } else {
             content.style.height = '100vh';
@@ -30,36 +29,34 @@ const Content = ({
     let actionText;
 
     const filteredBooksCount = filteredBooks.filter((book) => {
-        if (book.category === 'isInProgress') {
+        if (book.category === IN_PROGRESS_CATEGORY) {
             actionText = 'are reading';
-            return book.category === 'isInProgress';
-        } else if (book.category === 'isDone') {
+            return book.category === IN_PROGRESS_CATEGORY;
+        } else if (book.category === DONE_CATEGORY) {
             actionText = 'have read';
-            return book.category === 'isDone';
+            return book.category === DONE_CATEGORY;
         }
-    }).length;
+    });
 
     return (
-        <div className="content" ref={contentRef}>
-            <Title />
+        <div className={`${'content ' + hiddenClass}`} ref={contentRef}>
+            <h1 className="title">Reading List</h1>
             {showForm && <ReadingForm addBook={addBook} />}
             {showRemoveAllButton && (
                 <RemoveAllButton removeBooks={removeBooks} searchedBook={searchedBook} />
             )}
-            {filteredBooksCount > 0 && (
+            {filteredBooksCount.length > 0 && (
                 <h2 className="content__action-text">
                     {`You ${actionText} `}
                     <span className="content__book-count">
-                        {`${filteredBooksCount} ${filteredBooksCount > 1 ? 'books' : 'book'}`}
+                        {`${filteredBooksCount.length} ${
+                            filteredBooksCount.length > 1 ? 'books' : 'book'
+                        }`}
                     </span>
                 </h2>
             )}
             <ListMessage searchedBook={searchedBook} filteredBooks={filteredBooks} />
-            <BookList
-                changeCategory={changeCategory}
-                searchedBook={searchedBook}
-                windowWidth={windowWidth}
-            />
+            <BookList searchedBook={searchedBook} addBook={addBook} />
         </div>
     );
 };

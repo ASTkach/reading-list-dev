@@ -1,7 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useContext } from 'react';
+import { PageContext } from './Page';
 import ButtonsList from './ButtonsList';
 
-const Book = ({ author, bookTitle, id, category, changeCategory, windowWidth }) => {
+const Book = ({ author, bookTitle, id, category }) => {
+    const { windowWidth } = useContext(PageContext);
     const authorRef = useRef(null);
     const titleRef = useRef(null);
 
@@ -48,7 +50,7 @@ const Book = ({ author, bookTitle, id, category, changeCategory, windowWidth }) 
             >
                 {bookTitle}
             </p>
-            <ButtonsList id={id} category={category} changeCategory={changeCategory} />
+            <ButtonsList id={id} category={category} />
         </li>
     );
 };

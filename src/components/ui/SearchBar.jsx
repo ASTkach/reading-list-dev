@@ -1,4 +1,5 @@
 import { BsSearch } from 'react-icons/bs';
+import { MOBILE_WIDTH } from '../../constants';
 
 const SearchBar = ({
     filteredBooks,
@@ -6,7 +7,7 @@ const SearchBar = ({
     setSearchInput,
     searchInput,
     windowWidth,
-    showMenuHandler,
+    expandAside,
     searchMessage,
     setSearchMessage,
 }) => {
@@ -29,10 +30,16 @@ const SearchBar = ({
         if (resultsArray.length === filteredBooks.length) {
             setSearchMessage('');
             resultsArray = [];
-        } else if (!resultsArray.length && windowWidth < 611) {
+        } else if (!resultsArray.length && windowWidth < MOBILE_WIDTH) {
             setSearchMessage(<span className="search__message">No match</span>);
-        } else if (resultsArray.length && windowWidth < 611) {
+        } else if (resultsArray.length && windowWidth < MOBILE_WIDTH) {
             setSearchMessage(<span className="search__message">There is match</span>);
+        }
+    };
+
+    const searchIconHandler = () => {
+        if (windowWidth < MOBILE_WIDTH) {
+            expandAside();
         }
     };
 
@@ -41,9 +48,7 @@ const SearchBar = ({
             <BsSearch
                 className="search__icon"
                 onClick={() => {
-                    if (windowWidth < 611) {
-                        showMenuHandler();
-                    }
+                    searchIconHandler();
                 }}
             />
             <input

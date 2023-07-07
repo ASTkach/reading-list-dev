@@ -1,24 +1,25 @@
 import { useEffect } from 'react';
 import NavItem from './NavItem';
+import {
+    TO_READ_CATEGORY,
+    IN_PROGRESS_CATEGORY,
+    DONE_CATEGORY,
+    DELETED_CATEGORY,
+    INITIAL_DELAY,
+} from '../../constants';
 
-const NavBar = ({
-    activeNavItem,
-    setActiveNavItem,
-    filterCurrentBooks,
-    windowWidth,
-    setSearchMessage,
-}) => {
+const NavBar = ({ activeNavItem, setActiveNavItem, setSearchMessage }) => {
     const navItems = [
-        { id: 'isToRead', title: 'To Read' },
-        { id: 'isInProgress', title: 'In Progress' },
-        { id: 'isDone', title: 'Done' },
-        { id: 'isDeleted', title: 'Deleted' },
+        { id: TO_READ_CATEGORY, title: 'To Read' },
+        { id: IN_PROGRESS_CATEGORY, title: 'In Progress' },
+        { id: DONE_CATEGORY, title: 'Done' },
+        { id: DELETED_CATEGORY, title: 'Deleted' },
     ];
 
     useEffect(() => {
         setTimeout(() => {
-            setActiveNavItem('isToRead');
-        }, 4700);
+            setActiveNavItem(TO_READ_CATEGORY);
+        }, INITIAL_DELAY);
     }, []);
 
     const addActiveClassHandler = (id) => {
@@ -36,8 +37,6 @@ const NavBar = ({
                             {...item}
                             isActive={activeNavItem === item.id}
                             addActiveClass={addActiveClassHandler}
-                            filterCurrentBooks={filterCurrentBooks}
-                            windowWidth={windowWidth}
                         />
                     );
                 })}
